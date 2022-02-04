@@ -10,20 +10,20 @@ Requires that the `gh` cli is installed.
 ### Packer
 ```lua
 use({
-	"hrsh7th/nvim-cmp",
-	requires = {
-		{ 
-			"richardmarbach/cmp-github" 
-			requires = "nvim-lua/plenary.nvim"
-		},
-	},
+  "hrsh7th/nvim-cmp",
+  requires = {
+    { 
+      "richardmarbach/cmp-github" 
+      requires = "nvim-lua/plenary.nvim"
+    },
+  },
 })
 
 
 require('cmp').setup({
-	sources = {
-		{ name = "github" },
-	},
+  sources = {
+    { name = "github" },
+  },
 })
 
 ```
@@ -37,9 +37,9 @@ Plug "richardmarbach/cmp-github"
 
 lua << EOF
 require('cmp').setup({
-	sources = {
-		{ name = "github" },
-	},
+  sources = {
+    { name = "github" },
+  },
 })
 EOF
 ```
