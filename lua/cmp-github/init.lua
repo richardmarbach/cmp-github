@@ -66,7 +66,7 @@ function source:complete(params, callback)
 							label = detail,
 							detail = detail,
 							documentation = { kind = "markdown", value = description },
-              insertText = issue.url,
+							insertText = issue.url,
 						})
 					end
 					self.cache.fetched = true
@@ -79,5 +79,4 @@ function source:complete(params, callback)
 	end
 end
 
----Register custom source to nvim-cmp.
-require("cmp").register_source("github", source.new())
+return source.new()
