@@ -1,10 +1,11 @@
 # github-cmp
 
-## Installation
 
 ## Requirements
 
 Requires that the `gh` cli is installed.
+
+## Installation
 
 ### Packer
 ```lua
