@@ -9,10 +9,10 @@ source.new = function()
     fetched = false,
     items = {},
   }
+  self.prefix_regex = [[\cissue:\?\s\?$]]
   return self
 end
 
----Return this source is available in current context or not. (Optional)
 ---@return boolean
 function source:is_available()
   return vim.bo.filetype == "gitcommit"
@@ -24,17 +24,24 @@ function source:get_debug_name()
   return "github"
 end
 
----Return keyword pattern for triggering completion. (Optional)
----If this is ommited, nvim-cmp will use default keyword pattern. See |cmp-config.completion.keyword_pattern|
 ---@return string
 function source:get_keyword_pattern()
-  return "?{Issue: }[?]"
+  return [[#\?\(\d*\)]]
 end
 
----Invoke completion. (Required)
+function source:get_trigger_characters()
+  return { "#" }
+end
+
 ---@param params cmp.SourceCompletionApiParams
 ---@param callback fun(response: lsp.CompletionResponse|nil)
 function source:complete(params, callback)
+  local line = params.context.cursor_before_line
+  if not vim.regex(self.prefix_regex):match_str(line) then
+    callback(nil)
+    return
+  end
+
   if self.cache.fetched then
     callback(self.cache.items)
   else
@@ -67,6 +74,7 @@ function source:complete(params, callback)
               detail = detail,
               documentation = { kind = "markdown", value = description },
               insertText = issue.url,
+              sortText = string.format("%06d", issue.number),
             })
           end
           self.cache.fetched = true
