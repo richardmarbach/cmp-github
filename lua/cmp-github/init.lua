@@ -58,6 +58,8 @@ function source:complete(params, callback)
         },
         on_exit = function(j, return_value)
           if return_value ~= 0 then
+            self.cache.fetched = true
+            vim.notify(string.format("[cmp-github] Failed to fetch github issues: %s", j:result()), vim.log.levels.WARN)
             callback(nil)
             return
           end
