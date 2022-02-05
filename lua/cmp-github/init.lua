@@ -9,7 +9,7 @@ source.new = function()
     fetched = false,
     items = {},
   }
-  self.prefix_regex = [[\cissue:\?\s\?$]]
+  self.prefix_regex = [[\c\(#\|issue:\?\s\?\)$]]
   return self
 end
 
@@ -36,8 +36,9 @@ end
 ---@param params cmp.SourceCompletionApiParams
 ---@param callback fun(response: lsp.CompletionResponse|nil)
 function source:complete(params, callback)
+  local trigger_kind = params.completion_context.triggerKind
   local line = params.context.cursor_before_line
-  if not vim.regex(self.prefix_regex):match_str(line) then
+  if trigger_kind == 1 and not vim.regex(self.prefix_regex):match_str(line) then
     callback(nil)
     return
   end
