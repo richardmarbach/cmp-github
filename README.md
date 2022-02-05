@@ -1,9 +1,9 @@
-# github-cmp
-
+# cmp-github
 
 ## Requirements
 
-Requires that the `gh` cli is installed.
+- `neovim >= 0.6`
+- `gh` cli
 
 ## Installation
 
@@ -29,7 +29,7 @@ require('cmp').setup({
 ```
 
 
-### Plug
+### Vim-Plug
 ```vim
 Plug "nvim-lua/plenary.nvim"
 Plug "hrsh7th/nvim-cmp"
@@ -46,4 +46,4 @@ EOF
 
 ## Usage
 
-The completion source is only enabeld for `gitcommit` filetypes. Typing `Issue: ` triggers the completion of issues.
+The completion source is only enabeld for `gitcommit` filetypes. Typing `issue: ` or `#` triggers the completion of issues.
