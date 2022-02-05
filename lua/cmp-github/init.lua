@@ -57,6 +57,11 @@ function source:complete(params, callback)
           "number,title,body,url",
         },
         on_exit = function(j, return_value)
+          if return_value ~= 0 then
+            callback(nil)
+            return
+          end
+
           local issues = vim.json.decode(j:result()[1])
 
           local items = {}
