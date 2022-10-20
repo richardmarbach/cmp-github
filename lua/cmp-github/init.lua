@@ -13,11 +13,6 @@ source.new = function()
   return self
 end
 
----@return boolean
-function source:is_available()
-  return vim.bo.filetype == "gitcommit"
-end
-
 ---Return the debug name of this source. (Optional)
 ---@return string
 function source:get_debug_name()
